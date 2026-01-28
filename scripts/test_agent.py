@@ -5,8 +5,8 @@ agent = ClinicalAgent()
 
 async def run_test():
     result = await agent.handle_query(
-        user_id=1,
-        question="Is insulin covered for type 2 diabetes?"
+        user_id=2,
+        question="Where can i find info about COPD?"
     )
     print(result)
 
