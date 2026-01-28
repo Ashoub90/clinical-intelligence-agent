@@ -1,6 +1,6 @@
 from pydantic import ConfigDict, BaseModel
 from datetime import datetime
-from typing import List, Optional
+from typing import Optional
 
 # This is the "Base" rules for a document
 class MedicalDocumentBase(BaseModel):
@@ -20,3 +20,41 @@ class MedicalDocumentRead(MedicalDocumentBase):
 class SearchQuery(BaseModel):
     query: str
     limit: Optional[int] = 5
+
+# =========================
+# Coverage Rules
+# =========================
+class CoverageRuleRead(BaseModel):
+    plan: str
+    treatment_type: str
+    covered: bool
+    notes: Optional[str]
+
+    model_config = ConfigDict(from_attributes=True)
+
+
+# =========================
+# Users
+# =========================
+class UserRead(BaseModel):
+    id: int
+    name: str
+    plan: str
+    age: int
+
+    model_config = ConfigDict(from_attributes=True)
+
+
+# =========================
+# Agent Query
+# =========================
+class AgentQueryRequest(BaseModel):
+    user_id: int
+    question: str
+
+
+class AgentQueryResponse(BaseModel):
+    action: str        # answer | clarify | escalate
+    answer: str
+    confidence: float
+    evidence: Optional[str]    

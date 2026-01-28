@@ -6,7 +6,7 @@ from sqlalchemy.orm import sessionmaker
 DATABASE_URL = "postgresql+asyncpg://myuser:mypassword@127.0.0.1:5433/medical_rag"
 # 2. The Engine
 # We removed create_url because the engine handles the string directly
-engine = create_async_engine(DATABASE_URL, echo=True)
+engine = create_async_engine(DATABASE_URL, echo=False)
 
 # 3. The Session Factory
 AsyncSessionLocal = sessionmaker(
