@@ -41,11 +41,11 @@ function App() {
   };
 
   return (
-    <div style={{ padding: "40px" }}>
-      <button onClick={() => setView("chat")}>Chat</button>
+    <div style={{ padding: "40px", textAlign: "left" }}>
+      
       {isAdmin && <button onClick={() => setView("logs")}>Logs</button>}
 
-      {view === "chat" && (
+      
         <>
           <h1>Clinical Intelligence Agent</h1>
           <textarea
@@ -62,7 +62,7 @@ function App() {
 
           {answer && <p><b>Answer:</b> {answer}</p>}
         </>
-      )}
+     
 
       {view === "logs" && <Logs />}
     </div>
