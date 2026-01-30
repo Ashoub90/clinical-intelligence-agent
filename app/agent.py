@@ -65,8 +65,10 @@ class ClinicalAgent:
                 await session.commit()
 
                 return {
-                    "message": "Could you please clarify which medication, treatment, or condition you are asking about?"
+                    "action": "clarify",
+                    "answer": "Could you please clarify which medication, treatment, or condition you are asking about?"
                 }
+
 
             # 2️⃣ Fetch user
             user = (await session.execute(
@@ -74,7 +76,7 @@ class ClinicalAgent:
             )).scalar_one_or_none()
 
             if not user:
-                return {"status": "error", "message": "User not found"}
+                return {"status": "error", "answer": "User not found"}
 
             # 3️⃣ Embed query
             query_embedding = model.encode(question).tolist()
@@ -100,8 +102,8 @@ class ClinicalAgent:
                 await session.commit()
 
                 return {
-                    "status": "escalate",
-                    "message": "I could not find relevant medical guidelines. This will be reviewed by a human agent."
+                    "action": "escalate",
+                    "answer": "I could not find relevant medical guidelines. This will be reviewed by a human agent."
                 }
 
             context = "\n\n".join([c.content[:400] for c in chunks])
@@ -195,5 +197,5 @@ class ClinicalAgent:
 
             elif action == "escalate":
                 return {
-                    "message": "Your request requires review by a human specialist. Please wait for confirmation."
+                    "answer": "Your request requires review by a human specialist. Please wait for confirmation."
                 }
