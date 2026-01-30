@@ -1,5 +1,23 @@
+# Python
 __pycache__/
+*.pyc
 .env
+.venv/
+venv/
+.env.*
+
+# Database / vector artifacts
 postgres_data/
 *.db
 *.faiss
+
+# Node / React
+frontend/node_modules/
+frontend/dist/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
