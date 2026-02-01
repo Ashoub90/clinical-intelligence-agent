@@ -190,3 +190,11 @@ This project demonstrates RAG system design, agent reasoning, and human-in-the-l
 ## Summary
 
 This project is not just an LLM chatbot. It is a full AI system combining rules, retrieval, logging, escalation, and full-stack services. It mirrors real-world enterprise AI architectures at a prototype scale.
+
+## Documentation
+
+- [Overview](docs/overview.md)
+- [User Guide](docs/user-guide.md)
+- [System Architecture](docs/system-architecture.md)
+- [API Reference](docs/api-reference.md)
+- [Limitations & Risks](docs/limitations-and-risks.md)

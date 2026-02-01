@@ -44,9 +44,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/")
-async def root():
-    return {"message": "Clinical Intelligence Agent API is Live"}
 
 @app.post("/ask")
 async def ask_agent(request: AgentQueryRequest):
