@@ -2,15 +2,15 @@
 
 An AI-powered clinical insurance assistant that answers user questions using:
 
-Medical guidelines (NICE PDFs)
+- Medical guidelines (NICE PDFs)
 
-Insurance coverage rules (Silver / Gold plans)
+- Insurance coverage rules (Silver / Gold plans)
 
-Retrieval-Augmented Generation (RAG)
+- Retrieval-Augmented Generation (RAG)
 
-Human-in-the-loop (HITL) escalation
+- Human-in-the-loop (HITL) escalation
 
-Full logging and auditing
+- Full logging and auditing
 
 The system simulates how a health insurance company could automate first-line clinical coverage inquiries while remaining grounded in official medical guidance.
 
@@ -18,43 +18,43 @@ The system simulates how a health insurance company could automate first-line cl
 
 Users can ask natural language questions such as:
 
-“Is insulin covered for type 2 diabetes?”
+- “Is insulin covered for type 2 diabetes?”
 
-“What do NICE guidelines say about COPD management?”
+- “What do NICE guidelines say about COPD management?”
 
 ### The Agent Logic
 
-Retrieves relevant medical guideline chunks from a vector database (using sentence-transformers/all-MiniLM-L6-v2).
+- Retrieves relevant medical guideline chunks from a vector database (using sentence-transformers/all-MiniLM-L6-v2).
 
-Applies insurance coverage rules based on the user’s plan.
+- Applies insurance coverage rules based on the user’s plan.
 
-Generates a grounded answer using an LLM (gpt-4o-mini).
+- Generates a grounded answer using an LLM (gpt-4o-mini).
 
-Assigns an action: answer, clarify, or escalate to human review.
+- Assigns an action: answer, clarify, or escalate to human review.
 
-Logs every interaction for audit and monitoring.
+- Logs every interaction for audit and monitoring.
 
 ## Key Features
 
-Retrieval-Augmented Generation over NICE medical PDFs.
+- Retrieval-Augmented Generation over NICE medical PDFs.
 
-Insurance coverage rules (plan-based).
+- Insurance coverage rules (plan-based).
 
-Agent decision logic:
+- Agent decision logic:
 
-    Answer
+    - Answer
 
-    Clarify vague questions
+    - Clarify vague questions
 
-    Escalate low-confidence queries (HITL)
+    - Escalate low-confidence queries (HITL)
 
-PostgreSQL + pgvector vector database.
+- PostgreSQL + pgvector vector database.
 
-FastAPI backend & React frontend.
+- FastAPI backend & React frontend.
 
-Query logging and audit trail with an admin-only logs interface.
+- Query logging and audit trail with an admin-only logs interface.
 
-End-to-end working system.
+- End-to-end working system.
 
 ## Architecture
 
@@ -70,50 +70,27 @@ User (React UI) → FastAPI /ask endpoint → Agent logic (clarification + RAG +
 
 ### Backend:
 
-Python & FastAPI
+- Python & FastAPI
 
-SQLAlchemy (async)
+- SQLAlchemy (async)
 
-PostgreSQL + pgvector
+- PostgreSQL + pgvector
 
-OpenAI API (gpt-4o-mini)
+- OpenAI API (gpt-4o-mini)
 
-SentenceTransformers (all-MiniLM-L6-v2 embeddings)
+- SentenceTransformers (all-MiniLM-L6-v2 embeddings)
 
 ### Frontend:
 
-React (Vite)
+- React (Vite)
 
-Fetch API
+- Fetch API
 
 ### Infrastructure:
 
-Docker (PostgreSQL)
+- Docker (PostgreSQL)
 
-dotenv for secrets
-
-## Project Structure
-
-clinical-intelligence-agent/
-├── app/
-│   ├── main.py            # FastAPI app
-│   ├── agent.py           # Core agent logic
-│   ├── models.py          # SQLAlchemy models
-│   ├── schemas.py         # Pydantic schemas
-│   └── db.py              # Database connection
-│
-├── ingestion/
-│   └── ingest_docs.py     # PDF ingestion pipeline
-│
-├── scripts/
-│   ├── seed_users.py
-│   ├── seed_coverage_rules.py
-│   └── test_agent.py
-│
-├── frontend/              # React UI
-│
-├── data/raw_docs/         # NICE PDFs
-└── docker-compose.yml     # Infrastructure setup
+- dotenv for secrets
 
 
 ## Limitations
@@ -122,21 +99,21 @@ This project is a prototype and not a production deployment.
 
 Known limitations include:
 
-Confidence score is model-generated rather than computed from similarity metrics.
+- Confidence score is model-generated rather than computed from similarity metrics.
 
-Clarification detection relies on an LLM, increasing token usage.
+- Clarification detection relies on an LLM, increasing token usage.
 
-No authentication or authorization (users are mocked).
+- No authentication or authorization (users are mocked).
 
-No caching of embeddings or responses.
+- No caching of embeddings or responses.
 
-Token usage is not monitored or rate-limited.
+- Token usage is not monitored or rate-limited.
 
-Logs are stored in the main database instead of a dedicated service.
+- Logs are stored in the main database instead of a dedicated service.
 
-Frontend UI is minimal.
+- Frontend UI is minimal.
 
-No cloud deployment (runs locally only).
+- No cloud deployment (runs locally only).
 
 ## Future Improvements (Production-Grade Design) 
 
@@ -144,37 +121,37 @@ If deployed in a real organization, the system would include:
 
 ### Backend and Infrastructure
 
-Separate logging and monitoring service (ELK stack, Grafana, Prometheus).
+- Separate logging and monitoring service (ELK stack, Grafana, Prometheus).
 
-Token usage tracking per user & Rate limiting/API gateway.
+- Token usage tracking per user & Rate limiting/API gateway.
 
-Redis caching for embeddings and responses.
+- Redis caching for embeddings and responses.
 
-Background task queue (Celery, Kafka) & CI/CD pipeline.
+- Background task queue (Celery, Kafka) & CI/CD pipeline.
 
 ### Agent Improvements
 
-Confidence computed from vector similarity scores and rule consistency.
+- Confidence computed from vector similarity scores and rule consistency.
 
-Explicit out-of-scope detection and safer medical response policies.
+- Explicit out-of-scope detection and safer medical response policies.
 
-Multi-turn conversation memory.
+- Multi-turn conversation memory.
 
 ### Security and Access
 
-User authentication (JWT) and Role-based access control (RBAC).
+- User authentication (JWT) and Role-based access control (RBAC).
 
-Encrypted secrets management.
+- Encrypted secrets management.
 
 ### Monitoring and Analytics
 
-Dashboards for query volume, escalation rate, and cost per user.
+- Dashboards for query volume, escalation rate, and cost per user.
 
 ### Deployment
 
-Cloud hosting (AWS, GCP, or Azure) with Kubernetes (K8s).
+- Cloud hosting (AWS, GCP, or Azure) with Kubernetes (K8s).
 
-Managed PostgreSQL service & CDN for frontend.
+- Managed PostgreSQL service & CDN for frontend.
 
 ## How to Run Locally
 
